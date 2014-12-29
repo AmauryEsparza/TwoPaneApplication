@@ -1,8 +1,10 @@
 package com.example.twopaneapplication;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.twopaneapplication.Activities.CountryActivity;
 import com.example.twopaneapplication.Fragments.Article;
 import com.example.twopaneapplication.Fragments.Headlines;
 
@@ -36,6 +38,9 @@ public class MainActivity extends Activity implements Headlines.OnFragmentIntera
 
     //Fragment Method implementation
     public void onArticleSelected(int position){
+        Intent intent = new Intent(this, CountryActivity.class);
+        startActivity(intent);
+        /*
         Article articleFragment = (Article) getFragmentManager().findFragmentById(R.id.article);
         if(articleFragment != null){
             //If article frag is available, we're in two-pane layout
@@ -44,7 +49,7 @@ public class MainActivity extends Activity implements Headlines.OnFragmentIntera
         }
         else{
 
-        }
+        }*/
 
     }
 }

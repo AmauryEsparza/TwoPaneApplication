@@ -1,30 +1,15 @@
 package com.example.twopaneapplication.Fragments;
 
 import android.app.Activity;
-import android.app.Application;
 import android.app.ListFragment;
-import android.app.LoaderManager;
 import android.app.ProgressDialog;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ProgressBar;
-import android.widget.SimpleCursorAdapter;
-import android.view.ViewGroup.*;
-
-
-import com.example.twopaneapplication.Controllers.ArticleController;
 import com.example.twopaneapplication.Controllers.HeadlinesController;
-import com.example.twopaneapplication.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -80,7 +65,6 @@ public class Headlines extends ListFragment {
         super.onActivityCreated(savedInstanceState);
     }
 
-
     /*
     //This is in case we need to personalize the list
     @Override
@@ -101,12 +85,12 @@ public class Headlines extends ListFragment {
         progressDialog.setIndeterminate(true);
         progressDialog.show();
 
+        //This its bad use thread.post for modify UI elements.
         headlinesController = new HeadlinesController();
         new Thread(new Runnable() {
             @Override
             public void run() {
                 String[] headlines = headlinesController.getHeadlines();
-                setListAdapter(arrayAdapter);
                 arrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, headlines);
                 setListAdapter(arrayAdapter);
             }
