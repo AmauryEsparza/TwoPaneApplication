@@ -1,8 +1,11 @@
 package com.example.twopaneapplication.Controllers;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.example.twopaneapplication.Fragments.Countries;
 import com.example.twopaneapplication.Models.Country;
+import com.example.twopaneapplication.Networking.BaseCallback;
 import com.example.twopaneapplication.Networking.FeedzillaService;
 
 import java.util.List;
@@ -15,10 +18,36 @@ import retrofit.client.Response;
 /**
  * Created by Amaury Esparza on 14/12/2014.
  */
-public class CountryController {
+public class CountryController{
 
+    private FeedzillaService apiService = null;
+    private static Countries countriesFragment = null;
+    public CountryController(Countries countriesFragment){
+        RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("http://api.feedzilla.com")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .build();
+        apiService = restAdapter.create(FeedzillaService.class);
+        this.countriesFragment = countriesFragment;
+    }
 
-    List<Country> countriesList;
+    public void getCountriesList(){
+        apiService.getCountries("v1", new Callback<List<Country>>() {
+            @Override
+            public void success(List<Country> countries, Response response) {
+                Log.d("Retrofit Request success", countries.toString());
+                countriesFragment.responseListener(countries, response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.d("Retrofit Request failure", error.toString());
+                countriesFragment.responseListener(null, null);
+            }
+        });
+    }
+
+    /*List<Country> countriesList;
     public void getCountries() {
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("http://api.feedzilla.com")
@@ -36,10 +65,7 @@ public class CountryController {
                 countriesList = null;
                 Log.d("Retrofit Request failure", error.toString());
             }
-
         });
-
-
     }
 
     public String[] getList(){
@@ -56,5 +82,5 @@ public class CountryController {
         else{
             return null;
         }
-    }
+    }*/
 }

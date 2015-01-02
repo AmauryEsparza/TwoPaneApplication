@@ -1,6 +1,9 @@
 package com.example.twopaneapplication.Networking;
 
+import com.example.twopaneapplication.Models.Country;
 import com.squareup.okhttp.Call;
+
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -9,19 +12,7 @@ import retrofit.client.Response;
 /**
  * Created by Amaury Esparza on 26/12/2014.
  */
-public class BaseCallback<T> implements Callback{
+public interface BaseCallback{
 
-    T genericObject;
-    public BaseCallback(T genericObject){
-        this.genericObject = genericObject;
-    }
-    @Override
-    public void success(Object o, Response response) {
-
-    }
-
-    @Override
-    public void failure(RetrofitError error) {
-
-    }
+    public Response responseHandler(List<Country> listCountry) ;
 }
