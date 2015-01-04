@@ -1,4 +1,5 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,8 +11,9 @@
 
     <fragment
         android:id="@+id/headlines"
-        android:layout_height="fill_parent"
         android:name="com.example.twopaneapplication.Fragments.Headlines"
-        android:layout_width="match_parent"/>
+        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        tools:layout="@layout/fragment_headlines" />
 
 </LinearLayout>
