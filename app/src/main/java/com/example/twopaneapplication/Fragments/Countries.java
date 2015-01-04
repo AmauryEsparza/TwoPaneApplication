@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.twopaneapplication.Controllers.CountryController;
 import com.example.twopaneapplication.Models.Country;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit.client.Response;
@@ -24,8 +26,9 @@ import retrofit.client.Response;
 public class Countries extends ListFragment{
 
     private ArrayAdapter<String> arrayCountryAdapter;
+    ArrayList<String> arrayListCountries;
     private Countries.OnFragmentInteractionListener mCallback;
-    private String[] countriesName = {};
+    private String[] countriesName = {"No data"};
 
     public Countries(){
         //Public Constructor
@@ -36,7 +39,9 @@ public class Countries extends ListFragment{
         super.onActivityCreated(savedInstanceState);
         CountryController countryController = new CountryController(this);
         countryController.getCountriesList();
-        arrayCountryAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, countriesName);
+        arrayListCountries = new ArrayList<>();
+        arrayListCountries.addAll(Arrays.asList(countriesName));
+        arrayCountryAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, arrayListCountries);
         setListAdapter(arrayCountryAdapter);
     }
 
@@ -82,12 +87,13 @@ public class Countries extends ListFragment{
         //Update the ArrayList content
         if(countriesList != null) {
             arrayCountryAdapter.clear();
-            countriesName = new String[countriesList.size()];
             int i = 0;
+            countriesName = new String[countriesList.size()];
             for(Country country : countriesList){
-                arrayCountryAdapter.insert(country.getEnglishCultureName(), i);
+                countriesName[i] = country.getEnglishCultureName();
                 i++;
             }
+            arrayCountryAdapter.addAll(countriesName);
             arrayCountryAdapter.notifyDataSetChanged();
         }
         else{
