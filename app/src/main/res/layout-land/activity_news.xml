@@ -10,7 +10,11 @@
         android:layout_height="match_parent"
         android:name="com.example.twopaneapplication.Fragments.HeadlinesFragment"
         android:id="@+id/headlines"
-        tools:layout="@layout/fragment_headlines" />
+        tools:layout="@layout/fragment_headlines"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp" />
 
     <fragment
         android:layout_width="fill_parent"
@@ -18,5 +22,6 @@
         android:name="com.example.twopaneapplication.Fragments.ArticleFragment"
         android:id="@+id/article"
         android:layout_gravity="center_vertical"
-        tools:layout="@layout/fragment_article" />
+        tools:layout="@layout/fragment_article"
+        android:layout_margin="10dp" />
 </LinearLayout>

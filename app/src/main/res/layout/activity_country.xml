@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/countries"
-        android:name="com.example.twopaneapplication.Fragments.Countries"
+        android:name="com.example.twopaneapplication.Fragments.CategoriesFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tools:layout="@layout/fragment_countries"/>
