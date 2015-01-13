@@ -7,12 +7,14 @@ import android.os.Bundle;
 import com.example.twopaneapplication.Fragments.ArticleFragment;
 import com.example.twopaneapplication.Fragments.HeadlinesFragment;
 import com.example.twopaneapplication.Interfaces.BaseListFragmentCommunicator;
+import com.example.twopaneapplication.Models.Article;
+import com.example.twopaneapplication.Models.ArticleDescription;
 import com.example.twopaneapplication.R;
 
 /**
  * Created by Amaury Esparza on 03/01/2015.
  */
-public class NewsActivity extends Activity implements BaseListFragmentCommunicator<String> {
+public class NewsActivity extends Activity implements BaseListFragmentCommunicator<Article> {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +45,19 @@ public class NewsActivity extends Activity implements BaseListFragmentCommunicat
     }
 
     @Override
-    public void onSelectedListItem(String objectT){
+    public void onSelectedListItem(Article objectT){
         ArticleFragment articleFragment = (ArticleFragment) getFragmentManager().findFragmentById(R.id.article);
         if (articleFragment != null) {
             // If article frag is available, we're in two-pane layout...
             // Call a method in the ArticleFragment to update its content
-            articleFragment.updateArticleView(objectT);
+            articleFragment.updateArticleView(objectT.getSummary(), objectT.getUrl());
         } else {
             // Otherwise, we're in the one-pane layout and must swap frags...
             // Create fragment and give it an argument for the selected article
             ArticleFragment newFragment = new ArticleFragment();
             Bundle args = new Bundle();
-            args.putString("DESCRIPTION", objectT);
+            args.putString("DESCRIPTION", objectT.getSummary());
+            args.putString("URI", objectT.getUrl());
             newFragment.setArguments(args);
 
             FragmentTransaction transaction = getFragmentManager().beginTransaction();

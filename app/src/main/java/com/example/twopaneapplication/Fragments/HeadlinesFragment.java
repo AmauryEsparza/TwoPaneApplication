@@ -111,7 +111,7 @@ public class HeadlinesFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         if(articleDescription != null) {
             //Notify the parent Activity of selected item
-            mCallback.onSelectedListItem(articleDescription.getArticles().get(position).getSummary());
+            mCallback.onSelectedListItem(articleDescription.getArticles().get(position));
             //Set the item as checked
             getListView().setItemChecked(position, true);
         }
